@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <title>Game Vault</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- MOST OF THE WEBPAGE/SECTION will have an animation going up or fade -->
+<div class="main-wrapper"> 
+
+
+  <nav class="navbar navbar-expand-lg bg-black py-2 fade-in-text"> <!-- top navbar with logo, cart, wshlist, and username -->
+
+
+    <!-- LOGO / HOME BUTTON -->
+    <div class="content-container d-flex align-items-center">
+
+      <a class="navbar-brand text-warning fw-bold d-flex align-items-center" href="#" onclick="showPage('home')">
+        <img src="logo.png" alt="Game Vault Icon" height="45" class="me-2">
+        <img src="logo_name.png" alt="Game Vault" height="28">
+      </a>
+
+
+      <!-- SEARCH BAR -->
+      <!-- Will automatically send the user to the "store page" once clicked for simplicity -->
+      <form class="d-flex mx-auto w-50" onsubmit="event.preventDefault(); showPage('all-games');">
+        <div class="input-group">
+          <input class="form-control bg-search text-white border-0 rounded-0" type="search" id="gameSearch" onkeyup="gameSelection()" placeholder="Search..." onclick="showPage('all-games')">
+          <button class="btn btn-search-gold rounded-0" type="button" aria-label="Search"  onclick="showPage('all-games')">&#128269;</button>
+        </div>
+      </form>
+
+      <!-- NAVIGATION BAR BUTTONS-->
+      <!--  WISHLIST, CART, AND USER -->
+      <ul class="navbar-nav ms-auto flex-row gap-4">
+        <li class="nav-item">
+          <a class="nav-link text-white small cursor-pointer" onclick="showPage('wishlist')">⭐ Wishlist</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white small cursor-pointer" onclick="showPage('cart')">🛒 Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white small cursor-pointer" onclick="showPage('user-info'); updateProfileInfo()">👨‍💼 User_ITEC3230</a>
+        </li>
+      </ul>
+
+    </div>
+
+  </nav>
+
+
+  <!-- BOTTOM NAVBAR -->
+  <!-- STORE, LIBRARY, ABOUT, AND SUPPORT -->
+  <nav class="navbar navbar-expand bg-nav-bottom py-0 fade-in-text"> <!-- bottom navbar that has the other links to navgate the website -->
+
+    <!-- Will automatically go to the designated section once clicked -->
+    <div class="content-container">
+      <ul class="navbar-nav me-auto gap-4 py-1">
+        <li class="nav-item"><a class="nav-link text-white fw-semibold cursor-pointer" onclick="showPage('all-games')">STORE</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-semibold cursor-pointer" onclick="showPage('libraryPage')">LIBRARY</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-semibold cursor-pointer" onclick="showPage('about')">ABOUT</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-semibold cursor-pointer" onclick="showPage('support')">SUPPORT</a></li>
+      </ul>
+    </div>
+
+  </nav>
+
+
+  <!-- HOME (LANDING PAGE) -->
+  <section id="home"> <!-- home sect -->
+
+
+    <!-- GTA VI image here with button -->
+    <div class="hero-banner fade-in-text" onclick="showPage('game-gtavi')">
+      <a class="buy-now-btn slide-up-anim">BUY NOW</a>
+    </div>
+
+
+
+    <!-- TRENDING SECTION-->
+    <div class="trending-section py-5">
+    <div class="content-container">
+      <div class="trending-box p-4 rounded shadow-sm slide-up-anim">
+          <h3 class="text-white mb-4 trending-header pb-1">TRENDING NOW</h3>
+          
+        <!-- added 4 games -->
+          <div class="row g-4 mb-2">
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="game-card re4-bg" onclick="showPage('game-re4')">
+                <div class="card-info-bar">
+                  <span class="price small">CAD$ 79.99</span>
+                  <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('Resident Evil 4 Remake', 79.99, 'https://i.ytimg.com/vi/T54OWinnymM/maxresdefault.jpg')">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="game-card cyberpunk-bg" onclick="showPage('game-cyberpunk')">
+                <div class="card-info-bar">
+                  <span class="price small">CAD$ 79.99</span>
+                  <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('Cyberpunk 2077', 79.99, 'https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/ae84720b553c4ce943e9c342621b60f198beda0dbf533e21.jpg')">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="game-card l4d2-bg" onclick="showPage('game-l4d2')">
+                <div class="card-info-bar">
+                  <span class="price small">CAD$ 12.99</span>
+                  <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('Left 4 Dead 2', 12.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/capsule_616x353.jpg?t=1745368562')">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="game-card hades-bg" onclick="showPage('game-hades')">
+                <div class="card-info-bar">
+                  <span class="price small">CAD$ 32.50</span>
+                  <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('Hades', 32.50, 'https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5')">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+        </div> 
+        </div> 
+    </div>
+    </div>
+
+  </section>
+
+
+  <!--ALL GAMES (The games are in one table) -->
+  <!-- All of the games have the add to cart and add to whishlist here -->
+  <section id="all-games" style="display:none;" class="py-5"> 
+
+    <div class="content-container">
+      <div class="trending-box p-4 rounded shadow-sm text-light slide-up-anim">
+        <div class="d-flex justify-content-between align-items-end mb-3">
+          <h3 class="text-muted letter-spacing-2" style= "font-size: 26px;">ALL GAMES</h3>
+          <div>
+
+            <a class="sortG me-3 cursor-pointer text-decoration-none" onclick="sortGames('price')">Sort by Price</a>
+            <a class="sortG cursor-pointer text-decoration-none" onclick="sortGames('name')">Sort by Name</a>
+          </div>
+        </div>
+        
+        <table id="gameTable" style="width: 100%;">
+          <tr class="header">
+            <!-- Blank area -->
+            <th style="width:30%;"></th><th style="width:40%;"></th><th style="width:10%;"></th><th style="width:10%;"></th><th style="width:10%;"></th>
+          </tr>
+
+          <!-- All games here -->
+          <tr>
+            <td><a target="_blank" onclick="showPage('game-gtavi')" class="cursor-pointer"><img src="https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_and_Lucia_01_With_Logos_landscape.8596f77a.jpg&w=3840&q=75" class="gameImage"></a></td>
+            <td>
+              <table class="game-info">
+                <tr><td><h2 class="text-white m-0">Grand Theft Auto VI</h2></td></tr>
+                <tr><td><p1 class="text-muted small">PS5 / Xbox Series X</p1></td></tr>
+                <tr><td><p1 class="text-muted small">Action / Open World</p1></td></tr>
+              </table>
+            </td>
+            <td><p2 class="text-white fw-bold">CDN$ 89.99</p2></td>
+            <td><button class="addtoWishListButton" onclick="addToWishlist('Grand Theft Auto VI', 89.99, 'https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_and_Lucia_01_With_Logos_landscape.8596f77a.jpg&w=3840&q=75')">Add to Wishlist</button></td>
+            <td><button class="addtoCartButton" onclick="addToCart('Grand Theft Auto VI', 89.99, 'https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_and_Lucia_01_With_Logos_landscape.8596f77a.jpg&w=3840&q=75')">Add to Cart</button></td>
+          </tr>
+
+          <tr>
+            <td><a target="_blank" onclick="showPage('game-re4')" class="cursor-pointer"><img src="https://i.ytimg.com/vi/T54OWinnymM/maxresdefault.jpg" class="gameImage"></a></td>
+            <td>
+              <table class="game-info">
+                <tr><td><h2 class="text-white m-0">Resident Evil 4 Remake</h2></td></tr>
+                <tr><td><p1 class="text-muted small">PC / PS5 / Xbox</p1></td></tr>
+                <tr><td><p1 class="text-muted small">Horror / Action</p1></td></tr>
+              </table>
+            </td>
+            <td><p2 class="text-white fw-bold">CDN$ 79.99</p2></td>
+            <td><button class="addtoWishListButton" onclick="addToWishlist('Resident Evil 4 Remake', 79.99, 'https://i.ytimg.com/vi/T54OWinnymM/maxresdefault.jpg')">Add to Wishlist</button></td>
+            <td><button class="addtoCartButton" onclick="addToCart('Resident Evil 4 Remake', 79.99, 'https://i.ytimg.com/vi/T54OWinnymM/maxresdefault.jpg')">Add to Cart</button></td>
+          </tr>
+
+          <tr>
+            <td><a target="_blank" onclick="showPage('game-cyberpunk')" class="cursor-pointer"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/ae84720b553c4ce943e9c342621b60f198beda0dbf533e21.jpg" class="gameImage"></a></td>
+            <td>
+              <table class="game-info">
+                <tr><td><h2 class="text-white m-0">Cyberpunk 2077</h2></td></tr>
+                <tr><td><p1 class="text-muted small">PC / PS5 / Xbox</p1></td></tr>
+                <tr><td><p1 class="text-muted small">Action / Open World / RPG</p1></td></tr>
+              </table>
+            </td>
+            <td><p2 class="text-white fw-bold">CDN$ 79.99</p2></td>
+            <td><button class="addtoWishListButton" onclick="addToWishlist('Cyberpunk 2077', 79.99, 'https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/ae84720b553c4ce943e9c342621b60f198beda0dbf533e21.jpg')">Add to Wishlist</button></td>
+            <td><button class="addtoCartButton" onclick="addToCart('Cyberpunk 2077', 79.99, 'https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/ae84720b553c4ce943e9c342621b60f198beda0dbf533e21.jpg')">Add to Cart</button></td>
+          </tr>
+
+          <tr>
+            <td><a target="_blank" onclick="showPage('game-l4d2')" class="cursor-pointer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/capsule_616x353.jpg?t=1745368562" class="gameImage"></a></td>
+            <td>
+              <table class="game-info">
+                <tr><td><h2 class="text-white m-0">Left 4 Dead 2</h2></td></tr>
+                <tr><td><p1 class="text-muted small">PC</p1></td></tr>
+                <tr><td><p1 class="text-muted small">Action / Co-op</p1></td></tr>
+              </table>
+            </td>
+            <td><p2 class="text-white fw-bold">CDN$ 12.99</p2></td>
+            <td><button class="addtoWishListButton" onclick="addToWishlist('Left 4 Dead 2', 12.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/capsule_616x353.jpg?t=1745368562')">Add to Wishlist</button></td>
+            <td><button class="addtoCartButton" onclick="addToCart('Left 4 Dead 2', 12.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/capsule_616x353.jpg?t=1745368562')">Add to Cart</button></td>
+          </tr>
+
+          <tr>
+            <td><a target="_blank" onclick="showPage('game-hades')" class="cursor-pointer"><img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5" class="gameImage"></a></td>
+            <td>
+              <table class="game-info">
+                <tr><td><h2 class="text-white m-0">Hades</h2></td></tr>
+                <tr><td><p1 class="text-muted small">PC / PS4 / Switch</p1></td></tr>
+                <tr><td><p1 class="text-muted small">Action / Rogue-like</p1></td></tr>
+              </table>
+            </td>
+            <td><p2 class="text-white fw-bold">CDN$ 32.50</p2></td>
+            <td><button class="addtoWishListButton" onclick="addToWishlist('Hades', 32.50, 'https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5')">Add to Wishlist</button></td>
+            <td><button class="addtoCartButton" onclick="addToCart('Hades', 32.50, 'https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5')">Add to Cart</button></td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- IN THIS PART EVERY SECTION HERE ARE THE GAME INFORMATION-->
+  <!-- for this part, every game info has their own add to cart, add to wishlist, and some descriptions (They are almost identical) -->
+
+  <!-- GTA VI  -->
+  <section id="game-gtavi" style="display:none;" class="py-5 text-light">
+    <div class="content-container">
+      <div class="row g-4 mb-4 slide-up-anim">
+        <div class="col-lg-7">
+
+          <img src="https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_and_Lucia_01_With_Logos_landscape.8596f77a.jpg&w=3840&q=75" class="img-fluid rounded mb-3 w-100 border border-secondary" style="height: 400px; object-fit: cover;" alt="GTA VI">
+          <div class="thumbnail-gallery">
+            <img class="myImg" src="https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_Duval_04.374574ad.jpg&w=3840&q=75" alt="GTA VI Screenshot 1">
+            <img class="myImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwWeQEy6O9kujac1-EHhFUM4qNVf0EQi3P4g&s" alt="GTA VI Screenshot 2">
+            <img class="myImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8SheOGEbUo0vBgSOJEypcdRP9bwuctQ5EDg&s" alt="GTA VI Screenshot 3">
+            <img class="myImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7G8WpiQG6EhfeefKyU_ZNBawD_vaFKqX2Bg&s" alt="GTA VI Screenshot 4">
+            <img class="myImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN1XpF-rcIG83l78tzctCGF6SJoX3NXlhQhg&s" alt="GTA VI Screenshot 3">
+            <img class="myImg" src="https://press-start.com.au/wp-content/uploads/2025/05/GTA-6.jpg" alt="GTA VI Screenshot 4">
+            <img class="myImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwWeQEy6O9kujac1-EHhFUM4qNVf0EQi3P4g&s" alt="GTA VI Screenshot 2">
+          </div>
+        </div>
+        <div class="col-lg-5 d-flex flex-column fade-in-text">
+          <h2 class="mb-2 fw-normal">Grand Theft Auto VI</h2>
+          <div class="d-flex align-items-center mb-3">
+            <span class="text-warning fs-5 me-2">★★★★★</span>
+            <span class="text-light small">(45,102 Reviews)</span>
+          </div>
+          <p class="mb-4">Price: CAD$ 89.99</p>
+          <p class="mb-4 text-light" style="line-height: 1.6;">Grand Theft Auto VI heads to the state of Leonida, home to the neon-soaked streets of Vice City and beyond in the biggest, most immersive evolution of the Grand Theft Auto series yet.</p>
+          <div class="mb-5 small text-light" style="line-height: 1.8;">
+            <div>Genre: Action, Open World, Crime</div>
+            <div>Developer: Rockstar Games</div>
+          </div>
+          <div class="d-flex gap-3 mt-auto mb-2">
+            <button class="game-page-btn flex-grow-1" onclick="addToWishlist('Grand Theft Auto VI', 89.99, 'https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_and_Lucia_01_With_Logos_landscape.8596f77a.jpg&w=3840&q=75')">Add to Wishlist</button>
+            <button class="game-page-btn flex-grow-1" onclick="addToCart('Grand Theft Auto VI', 89.99, 'https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_and_Lucia_01_With_Logos_landscape.8596f77a.jpg&w=3840&q=75')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="trending-box p-4 rounded shadow-sm slide-up-anim">
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">About This Game</h6>
+        <p class="mb-5 text-light" style="line-height: 1.6;">Experience the next generation of open-world gaming. Follow the intertwined stories of Jason and Lucia as they navigate the criminal underworld of Leonida. With unprecedented graphical fidelity, highly advanced AI, and a living, breathing world that reacts to your every choice, this is the definitive crime saga you've been waiting for.</p>
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">System Requirements</h6>
+        <p class="mb-0 text-light small">OS: Windows 11 (64bit required) &nbsp;|&nbsp; PROCESSOR: Intel Core i9-10900K / AMD Ryzen 9 5900X &nbsp;|&nbsp; MEMORY: 32 GB RAM</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- RESIDENT EVIL -->
+  <section id="game-re4" style="display:none;" class="py-5 text-light">
+    <div class="content-container">
+      <div class="row g-4 mb-4 slide-up-anim">
+        <div class="col-lg-7">
+          <img src="https://i.ytimg.com/vi/T54OWinnymM/maxresdefault.jpg" class="img-fluid rounded mb-3 w-100 border border-secondary" style="height: 400px; object-fit: cover;" alt="RE4">
+          <div class="thumbnail-gallery">
+            <img class="myImg" src="https://i.ytimg.com/vi/4ikhM0aVofA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAZYlMjGu34M4hdt71bSHh2Vm6fDg" alt="Resident Evil 4 Screenshot 1">
+            <img class="myImg" src="https://www.techspot.com/images2/news/bigimage/2025/06/2025-06-07-image.jpg" alt="Resident Evil 4 Screenshot 2">
+            <img class="myImg" src="https://www.dsogaming.com/wp-content/uploads/2025/06/RE9-leaked-screesnhots-4.jpg" alt="Resident Evil 4 Screenshot 3">
+            <img class="myImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQikfPqm2MZVnc-dGadpHYs7tycGeKnSbFong&s" alt="Resident Evil 4 Screenshot 4">
+            <img class="myImg" src="https://cdn.mos.cms.futurecdn.net/cou4cLvXtjdYCq6ptnKvbk.jpg" alt="Cyberpunk 2077 Screenshot 4">
+            <img class="myImg" src="https://cdn.playfront.de/uploads/2025/06/resident-evil-9-gameplay.webp" alt="Cyberpunk 2077 Screenshot 4">
+            <img class="myImg" src="https://www.techspot.com/images2/news/bigimage/2025/06/2025-06-07-image.jpg" alt="Resident Evil 4 Screenshot 2">
+          </div>
+        </div>
+        <div class="col-lg-5 d-flex flex-column fade-in-text">
+          <h2 class="mb-2 fw-normal">Resident Evil 4 Remake</h2>
+          <div class="d-flex align-items-center mb-3">
+            <span class="text-warning fs-5 me-2">★★★★★</span>
+            <span class="text-light small">(12,405 Reviews)</span>
+          </div>
+          <p class="mb-4">Price: CAD$ 79.99</p>
+          <p class="mb-4 text-light" style="line-height: 1.6;">Requiem for the dead. Nightmare for the living. Prepare to escape death in a heart-stopping experience that will chill you to your core.</p>
+          <div class="mb-5 small text-light" style="line-height: 1.8;">
+            <div>Genre: Action, Horror, Story-rich</div>
+            <div>Developer: CAPCOM CO.</div>
+          </div>
+          <div class="d-flex gap-3 mt-auto mb-2">
+            <button class="game-page-btn flex-grow-1" onclick="addToWishlist('Resident Evil 4 Remake', 79.99, 'https://i.ytimg.com/vi/T54OWinnymM/maxresdefault.jpg')">Add to Wishlist</button>
+            <button class="game-page-btn flex-grow-1" onclick="addToCart('Resident Evil 4 Remake', 79.99, 'https://i.ytimg.com/vi/T54OWinnymM/maxresdefault.jpg')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="trending-box p-4 rounded shadow-sm slide-up-anim">
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">About This Game</h6>
+        <p class="mb-5 text-light" style="line-height: 1.6;">Plunged into an isolated, decaying European settlement ravaged by an unknown biological terror, you must rely on your instincts and a limited arsenal to uncover the sinister origins of the outbreak. Seamlessly blending relentless action with psychological dread, this tests your will to survive against grotesque mutations and a terrifying cult that will stop at nothing to ensure you never leave alive.</p>
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">System Requirements</h6>
+        <p class="mb-0 text-light small">OS: Windows 11 (64bit required) &nbsp;|&nbsp; PROCESSOR: Intel Core i7-8700 / AMD Ryzen 5 5500 &nbsp;|&nbsp; MEMORY: 16 GB RAM</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CYBERPUNK 2077 -->
+  <section id="game-cyberpunk" style="display:none;" class="py-5 text-light">
+    <div class="content-container">
+      <div class="row g-4 mb-4 slide-up-anim">
+        <div class="col-lg-7">
+          <img src="https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/ae84720b553c4ce943e9c342621b60f198beda0dbf533e21.jpg" class="img-fluid rounded mb-3 w-100 border border-secondary" style="height: 400px; object-fit: cover;" alt="Cyberpunk 2077">
+          <div class="thumbnail-gallery">
+            <img class="myImg" src="https://cdn.mos.cms.futurecdn.net/rLh7Dh7EKo8F6zmDtXYp8W.jpg" alt="Cyberpunk 2077 Screenshot 1">
+            <img class="myImg" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/ss_ae4465fa8a44dd330dbeb7992ba196c2f32cabb1.1920x1080.jpg?t=1756209867" alt="Cyberpunk 2077 Screenshot 2">
+            <img class="myImg" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/ss_bb1a60b8e5061caef7208369f42c5c9d574c9ac4.1920x1080.jpg?t=1756209867" alt="Cyberpunk 2077 Screenshot 3">
+            <img class="myImg" src="https://cdn.wccftech.com/wp-content/uploads/2023/05/Cyberpunk-2077-Path-Tracing-Superpopulation-scaled.jpg" alt="Cyberpunk 2077 Screenshot 4">
+            <img class="myImg" src="https://media.pitchfork.com/photos/5fd7c68758f883c36ef89bf3/master/pass/Cyberpunk2077_Used_To_Live_Here_RGB_EN.png" alt="Cyberpunk 2077 Screenshot 4">
+            <img class="myImg" src="https://blogs-images.forbes.com/erikkain/files/2018/08/Screenshot-225.png" alt="Cyberpunk 2077 Screenshot 4">
+            <img class="myImg" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/ss_ae4465fa8a44dd330dbeb7992ba196c2f32cabb1.1920x1080.jpg?t=1756209867" alt="Cyberpunk 2077 Screenshot 2">
+          </div>
+        </div>
+        <div class="col-lg-5 d-flex flex-column fade-in-text">
+          <h2 class="mb-2 fw-normal">Cyberpunk 2077</h2>
+          <div class="d-flex align-items-center mb-3">
+            <span class="text-warning fs-5 me-2">★★★★★</span>
+            <span class="text-light small">(88,321 Reviews)</span>
+          </div>
+          <p class="mb-4">Price: CAD$ 79.99</p>
+          <p class="mb-4 text-light" style="line-height: 1.6;">An open-world role-playing game set in the sprawling streets of Night City, a futuristic metropolis driven by power, technology, and extreme body modification.</p>
+          <div class="mb-5 small text-light" style="line-height: 1.8;">
+            <div>Genre: Action, RPG, Cyberpunk</div>
+            <div>Developer: CD PROJEKT RED</div>
+          </div>
+          <div class="d-flex gap-3 mt-auto mb-2">
+            <button class="game-page-btn flex-grow-1" onclick="addToWishlist('Cyberpunk 2077', 79.99, 'https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/ae84720b553c4ce943e9c342621b60f198beda0dbf533e21.jpg')">Add to Wishlist</button>
+            <button class="game-page-btn flex-grow-1" onclick="addToCart('Cyberpunk 2077', 79.99, 'https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/ae84720b553c4ce943e9c342621b60f198beda0dbf533e21.jpg')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="trending-box p-4 rounded shadow-sm slide-up-anim">
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">About This Game</h6>
+        <p class="mb-5 text-light" style="line-height: 1.6;">You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality. You can customize your character’s cyberware, skillset and playstyle, and explore a vast city where the choices you make shape the story and the world around you. Welcome to the next generation of open-world adventure.</p>
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">System Requirements</h6>
+        <p class="mb-0 text-light small">OS: Windows 10 (64bit) &nbsp;|&nbsp; PROCESSOR: Core i7-12700 / Ryzen 7 7800X3D &nbsp;|&nbsp; MEMORY: 16 GB RAM</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- LEFT 4 DEAD 2 -->
+  <section id="game-l4d2" style="display:none;" class="py-5 text-light">
+    <div class="content-container">
+      <div class="row g-4 mb-4 slide-up-anim">
+        <div class="col-lg-7">
+          <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/capsule_616x353.jpg?t=1745368562" class="img-fluid rounded mb-3 w-100 border border-secondary" style="height: 400px; object-fit: cover;" alt="Left 4 Dead 2">
+          <div class="thumbnail-gallery">
+            <img class="myImg" src="https://xboxwire.thesourcemediaassets.com/sites/2/2021/08/L4D_Characterpack02_Keyart10803.jpg" alt="Left 4 Dead 2 Screenshot 1">
+            <img class="myImg" src="https://www.gadgetmatch.com/wp-content/uploads/2020/09/left-4-dead-2-screen.jpg" alt="Left 4 Dead 2 Screenshot 2">
+            <img class="myImg" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/550/ss_73ad69168a263ce585e4823d9607d901719ca3c5.1920x1080.jpg?t=1745368562" alt="Left 4 Dead 2 Screenshot 3">
+            <img class="myImg" src="https://www.vice.com/wp-content/uploads/sites/2/2019/11/1574848325929-VICE-L4D-COVER.png" alt="Left 4 Dead 2 Screenshot 4">
+            <img class="myImg" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/ss_29b3b4f2a3994c889f6fc12e0781d9d4726ef33f.jpg" alt="Left 4 Dead 2 Screenshot 3">
+            <img class="myImg" src="https://www.wsgf.org/f/u/styles/node_gallery_display/public/contrib/dr/357/ingame_21x9.jpg?itok=DiSL34nI" alt="Left 4 Dead 2 Screenshot 4">
+            <img class="myImg" src="https://www.gadgetmatch.com/wp-content/uploads/2020/09/left-4-dead-2-screen.jpg" alt="Left 4 Dead 2 Screenshot 2">
+          </div>
+        </div>
+        <div class="col-lg-5 d-flex flex-column fade-in-text">
+          <h2 class="mb-2 fw-normal">Left 4 Dead 2</h2>
+          <div class="d-flex align-items-center mb-3">
+            <span class="text-warning fs-5 me-2">★★★★★</span>
+            <span class="text-light small">(412,099 Reviews)</span>
+          </div>
+          <p class="mb-4">Price: CAD$ 12.99</p>
+          <p class="mb-4 text-light" style="line-height: 1.6;">Set in the zombie apocalypse, Left 4 Dead 2 is the highly anticipated sequel to the award-winning Left 4 Dead, the #1 co-op game of 2008.</p>
+          <div class="mb-5 small text-light" style="line-height: 1.8;">
+            <div>Genre: Action, Zombies, Co-op</div>
+            <div>Developer: Valve</div>
+          </div>
+          <div class="d-flex gap-3 mt-auto mb-2">
+            <button class="game-page-btn flex-grow-1" onclick="addToWishlist('Left 4 Dead 2', 12.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/capsule_616x353.jpg?t=1745368562')">Add to Wishlist</button>
+            <button class="game-page-btn flex-grow-1" onclick="addToCart('Left 4 Dead 2', 12.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/capsule_616x353.jpg?t=1745368562')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="trending-box p-4 rounded shadow-sm slide-up-anim">
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">About This Game</h6>
+        <p class="mb-5 text-light" style="line-height: 1.6;">This co-op action horror FPS takes you and your friends through the cities, swamps and cemeteries of the Deep South, from Savannah to New Orleans across five expansive campaigns. You'll play as one of four new survivors armed with a wide and devastating array of classic and upgraded weapons.</p>
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">System Requirements</h6>
+        <p class="mb-0 text-light small">OS: Windows 7 32/64-bit &nbsp;|&nbsp; PROCESSOR: Pentium 4 3.0GHz &nbsp;|&nbsp; MEMORY: 2 GB RAM</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- HADES -->
+  <section id="game-hades" style="display:none;" class="py-5 text-light">
+    <div class="content-container">
+      <div class="row g-4 mb-4 slide-up-anim">
+        <div class="col-lg-7">
+          <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5" class="img-fluid rounded mb-3 w-100 border border-secondary" style="height: 400px; object-fit: cover;" alt="Hades">
+          <div class="thumbnail-gallery">
+            <img class="myImg" src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/21926696/Hades_Wallpaper_01.jpg?quality=90&strip=all&crop=7.8515625,0,84.296875,100" alt="Hades Screenshot 1">
+            <img class="myImg" src="https://hades.wiki.fextralife.com/file/Hades/homepage15-hades-wiki-guide-fullscreen.jpg" alt="Hades Screenshot 2">
+            <img class="myImg" src="https://images.ctfassets.net/5owu3y35gz1g/1StZVnaATlNYl4oaNNftOb/2853b2a421cfb09ab3b654f5d0b1c3ea/hades_09-dec-2019_03.jpg?w=1920&q=80" alt="Hades Screenshot 3">
+            <img class="myImg" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/ss_5e52844b891b54608eb51a850d6b53313eeed0f7.1920x1080.jpg?t=1758127023" alt="Hades Screenshot 4">
+            <img class="myImg" src="https://media.outnow.ch/Games/Bilder/2020/Hades/005.jpg" alt="Hades Screenshot 3">
+            <img class="myImg" src="https://www.newgamenetwork.com/app/uploads/2025/10/hades_04_2.jpg" alt="Hades Screenshot 4">
+            <img class="myImg" src="https://hades.wiki.fextralife.com/file/Hades/homepage15-hades-wiki-guide-fullscreen.jpg" alt="Hades Screenshot 2">
+          </div>
+        </div>
+        <div class="col-lg-5 d-flex flex-column fade-in-text">
+          <h2 class="mb-2 fw-normal">Hades</h2>
+          <div class="d-flex align-items-center mb-3">
+            <span class="text-warning fs-5 me-2">★★★★★</span>
+            <span class="text-light small">(215,904 Reviews)</span>
+          </div>
+          <p class="mb-4">Price: CAD$ 32.50</p>
+          <p class="mb-4 text-light" style="line-height: 1.6;">Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion and Transistor.</p>
+          <div class="mb-5 small text-light" style="line-height: 1.8;">
+            <div>Genre: Action, Rogue-like, Indie</div>
+            <div>Developer: Supergiant Games</div>
+          </div>
+          <div class="d-flex gap-3 mt-auto mb-2">
+            <button class="game-page-btn flex-grow-1" onclick="addToWishlist('Hades', 32.50, 'https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5')">Add to Wishlist</button>
+            <button class="game-page-btn flex-grow-1" onclick="addToCart('Hades', 32.50, 'https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="trending-box p-4 rounded shadow-sm slide-up-anim">
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">About This Game</h6>
+        <p class="mb-5 text-light" style="line-height: 1.6;">As the immortal Prince of the Underworld, you'll wield the powers and mythic weapons of Olympus to break free from the clutches of the god of the dead himself, while growing stronger and unraveling more of the story with each unique escape attempt. The Olympians have your back! Meet Zeus, Athena, Poseidon, and many more, and choose from their dozens of powerful Boons that enhance your abilities.</p>
+        <h6 class="text-muted mb-3 fw-normal text-uppercase">System Requirements</h6>
+        <p class="mb-0 text-light small">OS: Windows 7 SP1 &nbsp;|&nbsp; PROCESSOR: Dual Core 2.4 GHz &nbsp;|&nbsp; MEMORY: 4 GB RAM</p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- LIBRRARY PAGE -->
+  <!-- THIS HAS THE SAME LOGIC AS WISHLIST AND CART FOR RECORDING THE GAME ONCE THE GAME IS BOUGHT -->
+  <section id="libraryPage" style="display:none;" class="py-5 text-light fade-in-text"> <!-- Library sect -->
+    <div class="content-container" style="max-width: 900px;">
+      <h2 class="text-muted letter-spacing-2" style= "font-size: 26px;">My Library</h2>
+      <div class="trending-box p-4 rounded mb-4 pb-1 position-relative slide-up-anim">
+        <table id="libraryTable" class="w-100 custom-library-table">
+          <tr class="header d-none">
+            <th style="width:30%;"></th>
+            <th style="width:70%;"></th>
+          </tr>
+        </table>
+        <h3 style="text-align: center;" id="libraryMessage" class="mt-5 mb-5 text-muted fade-in-text">Your Library is Empty</h3>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CART PAGE -->
+  <!-- THIS HAS THE SAME LOGIC AS WISHLIST AND LIBRARY FOR RECORDING THE GAME ONCE THE GAME IS ADDED TO CART -->
+  <section id="cart" style="display:none;" class="py-5 text-light fade-in-text"> <!-- Cart sect -->
+    <div class="content-container">
+      <div class="trending-box p-4 rounded shadow-sm slide-up-anim">
+        <h2 id="shoppingHeader" class="text-muted letter-spacing-2" style= "font-size: 26px;"></h2>
+
+        <table id="cartTable" class="w-100 table-dark table">
+          <tr class="header">
+            <th style="width:30%;"></th>
+            <th style="width:40%;"></th>
+            <th style="width:20%;"></th>
+            <th style="width:10%;"></th>
+          </tr>
+        </table>
+
+        <h3 style="text-align: right; font-size: 16px;" id="totalPrice" class="text-muted letter-spacing-2" ></h3>
+
+        <button class="game-page-btn px-4 py-2" style="visibility: hidden;" id="checkOut"></button>
+        <div class="clearfix"></div>
+        
+        <h3 style="text-align: center;" id="shoppingMessage" class="mt-5 text-muted fade-in-text">Your Shopping Cart is Empty <br><br><br><br></h3>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- WISHLIST PAGE -->
+  <!-- THIS HAS THE SAME LOGIC AS CART AND LIBRARY FOR RECORDING THE GAME ONCE THE GAME IS ADDED TO WISHLIST -->
+  <section id="wishlist" style="display:none;" class="py-5 text-light fade-in-text"> <!-- wishlist sect -->
+    <div class="content-container">
+      <div class="trending-box p-4 rounded shadow-sm slide-up-anim">
+        <h2 id="wishlistHeader" class="text-muted letter-spacing-2" style= "font-size: 26px;"></h2>
+
+        <table id="wishlistTable" class="w-100 table-dark table">
+          <tr class="header">
+            <th style="width:25%;"></th>
+            <th style="width:30%;"></th>
+            <th style="width:7%;"></th>
+            <th style="width:3%;"></th>
+            <th style="width:10%;"></th>
+          </tr>
+        </table>
+
+        <h3 style="text-align: center;" id="wishlistMessage" class="mt-5 text-muted fade-in-text">Your Wishlist is Empty <br><br><br> </h3>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CHECKOUT PAGE -->
+  <!--  has a try and catch logic or will require user to complete the form-->
+  <section id="checkOutPage" style="display:none;" class="py-5 text-light fade-in-text"> <!-- section for the checkout -->
+    <div class="content-container">
+
+      <!-- the credit card and paypal option does not work :( -->
+      <form name="creditForm" class="w-100">
+        <div class="row g-4 slide-up-anim">
+          
+          <div class="col-lg-5">
+            <div class="trending-box p-4 rounded mb-4">
+              <h5 class="text-uppercase mb-4 fw-normal text-muted">Payment Method</h5>
+              
+              <div class="d-flex mb-4">
+                <div class="form-check me-4">
+                  <input class="form-check-input" type="radio" name="payment" id="creditCard" checked>
+                  <label class="form-check-label d-flex align-items-center" for="creditCard">
+                    <img src="https://www.pngmart.com/files/23/Visa-Logo-PNG.png" height="18" > Credit Card
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment" id="paypal">
+                  <label class="form-check-label d-flex align-items-center" for="paypal">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" height="18" >
+                  </label>
+                </div>
+              </div>
+
+
+              <!-- The real form starts here  -->
+              <!-- Will ask the user for their card number (needs 16 digits) -->
+              <div class="mb-3">
+                <label class="form-label small text-white">Card Number:</label>
+                <input type="text" id="cardNumber" name="number" maxlength="16" class="form-control checkout-input border-0 rounded-0">
+              </div>
+
+              <!-- MORE CARD INFO HERE (will need to input 2-3 numbers to complete) -->
+              <div class="row mb-3 g-3">
+                <div class="col-4">
+                  <label class="form-label small text-white">Month:</label>
+                  <input type="text" id="month" name="month" class="form-control checkout-input border-0 rounded-0" maxlength="2">
+                </div>
+                <div class="col-4">
+                  <label class="form-label small text-white">Year:</label>
+                  <input type="text" class="form-control checkout-input border-0 rounded-0" maxlength="2">
+                </div>
+                <div class="col-4">
+                  <label class="form-label small text-white">CVV:</label>
+                  <input type="text" id="CVV" name="CVV" maxlength="3" class="form-control checkout-input border-0 rounded-0">
+                </div>
+              </div>
+              
+              <!-- not too strict with this  -->
+              <div class="mb-3">
+                <label class="form-label small text-white">Name of Card:</label>
+                <input type="text" id="name" name="name" class="form-control checkout-input border-0 rounded-0">
+              </div>
+
+              <!-- Does not work -->
+              <div class="d-flex justify-content-end mt-4">
+                <div class="form-check">
+                  <input class="form-check-input rounded-0" type="checkbox" id="saveCard">
+                  <label class="form-check-label small" for="saveCard">Save Card</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Will ask the user to complete it (The script will look for @ and . ) -->
+            <div class="trending-box p-4 rounded">
+              <h5 class="text-uppercase mb-4 fw-normal text-muted">Account / Email</h5>
+              <div>
+                <label class="form-label small text-white">Send receipt and game keys to:</label>
+                <input type="text" id="Eaddress_checkout" name="emailaddress" class="form-control checkout-input border-0 rounded-0">
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Button -->
+          <div class="col-lg-7 d-flex flex-column">
+            <div class="trending-box p-4 rounded d-flex flex-column h-100">
+              <h5 class="text-uppercase mb-4 fw-normal text-muted">Order Summary</h5>
+              
+              <div class="flex-grow-1">
+                <table id="checkOutTable" class="w-100 custom-checkout-table">
+                  <tr class="header d-none">
+                    <th style="width:30%;"></th>
+                    <th style="width:40%;"></th>
+                    <th style="width:20%;"></th>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="mt-4 pt-3 border-top border-secondary d-flex justify-content-between align-items-end">
+                 <h5 class="m-0 fw-bold">TOTAL:</h5>
+                 <div class="text-end">
+                   <div class="text-muted small mb-1">Includes 13% HST</div>
+                   <h5 style="text-align: right;" id="totalCheckOutPrice" class="text-white m-0"></h5>
+                 </div>
+              </div>
+            </div>
+
+            <div class="text-end mt-3">
+              <button type="submit" class="game-page-btn px-4 py-2">Complete Purchase</button>
+          </div>
+          </div>
+
+      </div>
+      </form>
+    </div>
+  </section>
+
+
+
+  <!-- RECEIPT PAGE -->
+  <!-- SAME LOGIC WITH CART, WISHLIST, AND LIBRARY. The info will be saved and go here once the user clicks "complete purchase" -->
+  <section id="receiptPage" style="display:none;" class="py-5 text-light fade-in-text"> <!-- section for the receipt -->
+    <div class="content-container" style="max-width: 900px;">
+      
+      <div class="d-flex justify-content-center mb-5">
+        <div class="success-pill d-flex align-items-center px-4 py-2 rounded-pill slide-up-anim">
+          <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3" style="width:24px; height:24px;">
+            <span class="text-white fw-bold" style="font-size: 14px;">✓</span>
+          </div>
+          <h5 class="m-0 fw-normal">PAYMENT SUCCESSFUL</h5>
+        </div>
+      </div>
+
+      <div class="trending-box p-4 rounded mb-4 slide-up-anim">
+        <h3 id="nameReceipt" class="mb-2 fw-bold text-white"></h3>
+        <p class="text-muted mb-4 fs-5">A receipt has been sent to your email.</p>
+        
+        <h5 class="fw-normal mb-1">Order Number: <span id="receiptCode" class="fw-light"></span></h5>
+        <h5 class="fw-normal m-0">Date: <span id="date" class="fw-light"></span></h5>
+        
+        <span id="emailReceipt" class="d-none"></span>
+        <h4 id="totalRecieptPrice" class="d-none"></h4>
+      </div>
+
+      <!-- blank table (will populate once the event is triggered) -->
+      <div class="trending-box p-4 rounded mb-4 pb-1 position-relative slide-up-anim">
+        <table id="recieptTable" class="w-100">
+          <tr class="header d-none">
+            <th style="width:30%;"></th>
+            <th style="width:40%;"></th>
+            <th style="width:20%;"></th>
+          </tr>
+        </table>
+      </div>
+
+
+      <div class="d-flex justify-content-center gap-4 mt-5 slide-up-anim">
+        <button class="game-page-btn px-4 py-2" onclick="showPage('libraryPage')">GO TO MY LIBRARY</button>
+        <button class="game-page-btn px-4 py-2" onclick="resetCart()">CONTINUE SHOPPING</button>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- CONTACT PAGE -->
+  <!-- HAS THE SAME LOGIC AS THE ERROR CHECKING OF THE PAYMENT INFORMATION -->
+  <section id="support" style="display:none;" class="py-5 text-light fade-in-text"> <!-- Contact sect -->
+    <div class="content-container">
+      <div class="formContainer trending-box p-4 rounded shadow-sm slide-up-anim" style="background-color: #1a232c; border: 1px solid #2a3e52;">
+        
+        <div style="text-align:center" class="mb-5 fade-in-text">
+          <h2 class="text-muted letter-spacing-2" style= "font-size: 26px; text-align: center;">Contact Us!</h2>
+          <p style="color: #ccc;">Help us improve, by sending us any suggestions:</p>
+        </div>
+        
+        <div class="row align-items-center">
+          <div class="col-md-5 text-center slide-up-anim">
+            <img src="https://static.wikia.nocookie.net/hades_gamepedia_en/images/6/64/Hades.png/revision/latest?cb=20210207072259" style="width:100%; max-height: 400px; object-fit: contain;" alt="Hades Character">
+          </div>
+          
+          <div class="col-md-7 slide-up-anim">
+            <form name="contactForm">
+              <div class="mb-3">
+                <label for="fname" class="form-label" style="color: #ccc;">First Name</label>
+                <input type="text" id="fname" name="firstname" class="form-control checkout-input border-0 rounded-0">
+              </div>
+              
+              <div class="mb-3">
+                <label for="lname" class="form-label" style="color: #ccc;">Last Name</label>
+                <input type="text" id="lname" name="lastname" class="form-control checkout-input border-0 rounded-0" >
+              </div>
+              
+              <div class="mb-3">
+                <label for="Eaddress" class="form-label" style="color: #ccc;">Email Address</label>
+                <input type="text" id="Eaddress" name="emailaddress" class="form-control checkout-input border-0 rounded-0" >
+              </div>
+              
+              <div class="mb-4">
+                <label for="subject" class="form-label" style="color: #ccc;">Any Suggestions?</label>
+                <textarea id="subject" name="something" class="form-control checkout-input border-0 rounded-0" style="height:170px"></textarea>
+              </div>
+              
+              <input type="submit" value="Submit" class="game-page-btn float-end">
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="display:none;" class="py-5 text-light fade-in-text"> <!-- ** contents of the about page ** -->
+    <div class="content-container" style="max-width: 1000px;">
+      <h2 class="text-muted letter-spacing-2" style= "font-size: 26px; text-align: center;">About Game Vault</h2>
+      <div class="trending-box p-5 rounded shadow-sm slide-up-anim text-center" style="background-color: #1a232c; border: 1px solid #2a3e52;">
+        <p style="color: #ccc; font-size: 1.1rem; line-height: 1.8;">Welcome to <strong>Game Vault</strong> the best depository of the newest and biggest in the gaming world. Our mission is to provide gamers with a large selection of categories, genres, and varieties.</p>
+        <p style="color: #ccc; font-size: 1.1rem; line-height: 1.8;">The Vault holds gamers for all types of gamers. Whether you're a cozy gamer or a competitive shooter gamer or a chill RPG open world gamer, you will find a title that speaks to you here. </p>
+        <p style="color: #ccc; font-size: 1.1rem; line-height: 1.8;">We are always adding new games to our collection, creating new features for the site, and listing to our community. Unlock the Game Vault, we garentee you will find what your looking for inside.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- User Info Section -->
+
+  <section id="user-info" style="display:none;" class="py-5 text-light fade-in-text">
+    <div class="content-container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+
+          <div class="trending-box p-5 rounded">
+
+            <div class="text-center mb-5">
+              <p class="pb-2 fw-bold" style="font-size: 32px;">User Profile</p>
+            </div>
+
+            <div style="margin-bottom: 80px;"></div>
+          
+            <div class="row align-items-center mb-4">
+              <div class="col-md-4 text-center">
+                <div class="profile-avatar-circle mb-3">
+                  <!-- <i class="fas fa-user fa-5x text-secondary"></i> -->
+                   <img src="profile_pic.jpg" alt="Profile Picture" class="profile-pic">
+                </div>
+                <button class="add-to-cart-btn">Change Display Picture</button>
+              </div>
+
+              <div class="col-md-8">
+                <h3 id="display-username" class="mb-1">User_ITEC3230</h3>
+                <p class="text-muted" id="display-email">user_ITEC3230@gmail.com</p>
+                <hr class="border-secondary">
+                <div class="d-flex justify-content-between">
+                  <span><strong>Games Owned:</strong></span>
+                  <span id="stat-games-count">0</span>
+                </div>
+                <hr class="border-secondary">
+                <div class="d-flex justify-content-between">
+                  <span><strong>Profile Created On:</strong></span>
+                  <span>March 20, 2026</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 100px;"></div>
+
+            <div class="mt-5">
+              <h4>Account Settings</h4>
+              <div class="list-group list-group-flush mt-3">
+                <button class="list-group-item list-group-item-action bg-transparent text-light border-secondary cursor-pointer">Edit Profile Details</button>
+                <button class="list-group-item list-group-item-action bg-transparent text-light border-secondary cursor-pointer">Security & Password</button>
+                <button class="list-group-item list-group-item-action bg-transparent border-secondary cursor-pointer logout-link" onclick="handleLogout()">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Log In Section -->
+
+  <section id="user-login" style="display:none;" class="py-5 text-light fade-in-text">
+    <div class="content-container">
+      <div class="row justify-content-center">
+
+        <div class="col-md-5">
+          <div style="margin-top: 50px;"></div>
+
+          <div class="mb-5 mt-4 entry-logo-animation">
+            <img src="logo.png" alt="Game Vault Icon" style="height: 120px;" class="mb-3 d-block mx-auto">
+            <img src="logo_name.png" alt="Game Vault" style="height: 50px;" class="d-block mx-auto">
+          </div>
+
+          <div style="margin-bottom: 75px;"></div>
+
+          <div class="trending-box p-5 rounded shadow-lg">
+            <p class="text-muted letter-spacing-2" style="font-size: 16px; text-align: center;">THE VAULT AWAITS</p>
+            <div style="margin-bottom: 75px;"></div>
+
+            <form id="loginForm" onsubmit="event.preventDefault(); showPage('home');">
+
+              <div class="mb-4">
+                <label class="form-label small text-uppercase fw-bold text-muted">Email Address</label>
+                <input type="email" class="form-control bg-dark text-light border-secondary" placeholder="user_ITEC3230@gmail.com">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label small text-uppercase fw-bold text-muted">Password</label>
+                <input type="password" class="form-control bg-dark text-light border-secondary" placeholder="••••••••••••">
+              </div>
+          
+              <button type="submit" class="add-to-cart-btn w-100 py-2 mb-3" style="font-size: 18px;">
+                Log In
+              </button>
+          
+              <div class="text-center">
+                <p class="text-muted small text-decoration-none">Are You New to Game Vault?
+                  <a href="#" style="color: #a3a23e; font-weight: 700; margin-left: 5px; text-decoration: none;" onclick="showPage('create-account')">Sign Up Today</a>
+                </p>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Create Account Section -->
+
+  <section id="create-account" style="display:none;" class="py-5 text-light fade-in-text">
+    <div class="content-container">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <div style="margin-top: 50px;"></div>
+
+          <div class="mb-5 mt-4 entry-logo-animation">
+            <img src="logo.png" alt="Game Vault Icon" style="height: 120px;" class="mb-3 d-block mx-auto">
+            <img src="logo_name.png" alt="Game Vault" style="height: 50px;" class="d-block mx-auto">
+          </div>
+
+          <div style="margin-bottom: 75px;"></div>
+
+          <div class="trending-box p-5 rounded shadow-lg">
+            <p class="text-muted letter-spacing-2" style="font-size: 16px; text-align: center;">JOIN THE VAULT</p>
+            <div style="margin-bottom: 75px;"></div>
+
+            <form id="registerForm" onsubmit="handleRegistration(event)">
+              <div class="mb-4">
+                <label class="form-label small text-uppercase fw-bold text-muted">Username</label>
+                <input type="text" class="form-control bg-dark text-light border-secondary" placeholder="User_ITEC3230">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label small text-uppercase fw-bold text-muted">Email Address</label>
+                <input type="email" class="form-control bg-dark text-light border-secondary" placeholder="user_ITEC3230@gmail.com">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label small text-uppercase fw-bold text-muted">Password</label>
+                <input type="password" class="form-control bg-dark text-light border-secondary" placeholder="••••••••••••">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label small text-uppercase fw-bold text-muted">Confirm Password</label>
+                <input type="password" class="form-control bg-dark text-light border-secondary" placeholder="••••••••••••">
+              </div>
+        
+              <button type="submit" class="add-to-cart-btn w-100 py-2 mb-3" style="font-size: 18px;">
+                Create Account
+              </button>
+        
+              <div class="text-center">
+                <p class="text-muted small">Already a Member?
+                  <a href="#" onclick="showPage('user-login')" style="color: #a3a23e; font-weight: 700; margin-left: 5px; text-decoration: none;">Log In Here</a>
+                </p>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bottom-footer py-2 mt-auto text-light small w-100"> <!-- footer details -->
+    <div class="content-container d-flex justify-content-center">
+      <span class="mx-3 cursor-pointer">Terms of Service</span> | 
+      <span class="mx-3 cursor-pointer">Privacy Policy</span> | 
+      <span class="mx-3 cursor-pointer" onclick="showPage('support')">Contact Support</span> | 
+      <span class="mx-3 cursor-pointer">Terms of Sale</span>
+    </div>
+  </footer>
+
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
+
+</div> 
+<script src="script.js"></script>
+</body>
+</html>

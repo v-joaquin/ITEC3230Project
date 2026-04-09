@@ -1,0 +1,703 @@
+/*This part is the main BODY, this will be the default text and color*/
+body {
+  background-color: #161e27; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/*MAIN CONTAINER FOR ALL OF THE CONTENT OR SECTION*/
+/*So all of the content will go in the center of the page*/
+.main-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  max-width: 96%; 
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+
+
+/*ANIMATION CODE FOR FADING*/
+@keyframes textAnimation {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/*ANIMATION CODE FOR GOING UP*/
+@keyframes goUp{
+  from{ opacity:0; transform: translateY(400px); }
+  to{opacity:1; transform: translateY(0px);}
+}
+
+
+/*ANIMATION CODE FOR GOING LEFT*/
+@keyframes goLeft{
+  from{ opacity:0; transform: translateX(400px); }
+  to{opacity:1; transform: translateX(0px);}
+}
+
+/*ANIMATION CODE FOR GOING RIGHT*/
+@keyframes goRight{
+  from{ opacity:0; transform: translateX(-400px); }
+  to{opacity:1; transform: translateX(0px);}
+}
+
+/*It sets the text to its positon and theres an added animation*/
+.fade-in-text {
+  animation: textAnimation 1s ease-in;
+}
+
+.slide-up-anim {
+  animation: goUp 0.8s ease-out;
+}
+
+.slide-left-anim {
+  animation: goLeft 0.8s ease-out;
+}
+
+.slide-right-anim {
+  animation: goRight 0.8s ease-out;
+}
+
+
+
+/*NAVIGATION BAR*/
+/*I used list to set them*/
+.bg-black {
+  background-color: #0b0c10 !important; 
+}
+
+.filter-gold {
+  filter: invert(72%) sepia(50%) saturate(600%) hue-rotate(35deg) brightness(95%) contrast(90%);
+}
+
+/*game search bar*/
+.bg-search {
+  background-color: #4a5568 !important; 
+}
+
+.bg-search::placeholder {
+  color: #a0aec0 !important;
+}
+
+.btn-search-gold {
+  background-color: #a48130; 
+  color: white;
+  border: none;
+}
+
+.btn-search-gold:hover {
+  background-color: #8c6d26;
+  color: white;
+}
+
+.bg-nav-bottom {
+  background-color: #1a232c !important; 
+  border-bottom: 1px solid #151e28; 
+}
+
+.bg-nav-bottom .nav-link {
+  font-size: 14px;
+}
+
+.bg-nav-bottom .nav-link:hover {
+  color: #d1d5db !important;
+}
+
+
+
+/*BACKGROUND IMAGE*/
+/*The image will have a background and a text using "backgroundText" to work with it*/
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 700px; 
+  background-image: url('https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_and_Lucia_01_With_Logos_landscape.8596f77a.jpg&w=3840&q=75'); 
+  background-size: cover;
+  background-position: top center; 
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center;
+  box-shadow: inset 0px -100px 80px -20px #161e27; 
+  cursor: pointer;
+}
+
+
+/*BUTTONS HERE*/
+.hero-banner .buy-now-btn {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  text-shadow: 2px 2px 5px rgba(0,0,0,1);
+  margin-bottom: 40px; 
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.hero-banner .buy-now-btn:hover {
+  transform: scale(1.05);
+}
+
+
+
+/* RECOMMENDED GAMES OR FEAUTRED GAME SLIDE*/
+/*this sets the feautured games on the home page*/
+.trending-section {
+  background-color: transparent; 
+}
+
+.trending-box {
+  background-color: #21303f; 
+  border: 1px solid #2a3e52; 
+}
+
+.trending-header {
+  border-bottom: 2px solid white;
+  display: inline-block;
+  font-size: 1.4rem;
+}
+
+
+
+/*THIS IS AT THE BOTTOM OF THE FEATURED GAMES*/
+/* a table like image gallery that can be clicked */
+.game-card {
+  position: relative;
+  height: 220px; 
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #151e28;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.game-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.re4-bg { background-image: url('https://i.ytimg.com/vi/T54OWinnymM/maxresdefault.jpg'); }
+.cyberpunk-bg { background-image: url('https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/ae84720b553c4ce943e9c342621b60f198beda0dbf533e21.jpg'); }
+.l4d2-bg { background-image: url('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/550/capsule_616x353.jpg?t=1745368562'); }
+.hades-bg { background-image: url('https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5'); }
+
+.card-info-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 100%);
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 60px;
+}
+
+
+/*Add to cart button*/
+.add-to-cart-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-to-cart-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+
+/*SORT BUTTON*/
+.sortG {
+  color: #a0aec0;
+  transition: color 0.3s;
+  font-size: 14px;
+}
+
+.sortG:hover {
+  color: white;
+}
+
+
+/*Game table*/
+#gameTable {
+  border-collapse: collapse;
+}
+
+#gameTable td {
+  border-bottom: 1px solid #1c2835;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#gameTable tr:last-child td {
+  border-bottom: none;
+}
+
+
+/*Game image inside the game table*/
+.gameImage {
+  width: 100%;
+  max-width: 250px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+  border: 1px solid #151e28;
+}
+
+/*The buttons here are closely similar*/
+.addtoCartButton, .addtoWishListButton, .removeButton {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #4a5568;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+  margin-bottom: 5px;
+}
+
+.addtoCartButton:hover, .addtoWishListButton:hover, .removeButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+
+
+/*GAME DESCRIPTION HERE*/
+.game-page-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #718096;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.game-page-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+
+/*Game Description Container*/
+.thumbnail-gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+/*Scroll container or image container for the games*/
+.thumbnail-gallery img {
+  height: 90px;
+  width: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #2a3e52;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.thumbnail-gallery img:hover {
+  border-color: #a0aec0;
+}
+
+.thumbnail-gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+.thumbnail-gallery::-webkit-scrollbar-track {
+  background: #161e27; 
+  border-radius: 4px;
+}
+
+.thumbnail-gallery::-webkit-scrollbar-thumb {
+  background: #4b657e; 
+  border-radius: 4px;
+}
+
+
+
+/*FOOTER*/
+.bottom-footer {
+  background-color: #314355;
+  border-top: 1px solid #1a2634;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-pointer:hover {
+  text-decoration: underline;
+}
+
+
+
+/* MODAL IMAGE SCRIPT */
+.myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.myImg:hover {opacity: 0.7;}
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 9999; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 8px;
+}
+
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 900px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+  font-size: 18px;
+}
+
+.modal-content, #caption {  
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+.close {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover, .close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+/*CART TABLE*/
+/*Closely similar to the other tables*/
+#cartTable, #wishlistTable {
+  --bs-table-bg: transparent; 
+  --bs-table-color: white;
+}
+
+#cartTable th, #wishlistTable th {
+  border-bottom: 1px solid #2a3e52; 
+}
+
+#cartTable td, #wishlistTable td {
+  border-bottom: 1px solid #1c2835; 
+}
+
+
+
+/*CHECK OUT TABLE*/
+/*Closely similar to the other tables*/
+.checkout-input {
+  background-color: #d1d5db !important;
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+.checkout-input:focus {
+  background-color: #e2e8f0 !important;
+  color: #000000 !important;
+  box-shadow: none;
+  outline: none;
+}
+
+.checkout-input::placeholder {
+  color: #4a5568 !important; 
+}
+
+.custom-checkout-table td {
+  border: none !important; 
+}
+
+#checkOutTable tr {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+}
+
+#checkOutTable td:nth-child(1) { width: 35%; }
+#checkOutTable td:nth-child(2) { width: 40%; font-size: 1.1rem !important; padding-left: 15px; }
+#checkOutTable td:nth-child(3) { width: 25%; font-size: 1rem !important; text-align: right; }
+
+#checkOutTable img {
+  width: 100% !important;
+  height: 80px !important;
+  object-fit: cover !important;
+  border-radius: 4px;
+  border: 1px solid #2a3e52;
+}
+
+.success-pill {
+  background-color: #21303f;
+  border: 1px solid #2a3e52;
+}
+
+
+
+/*RECEIPT PAGE TABLE*/
+/*Closely similar to the other tables*/
+#recieptTable tr {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 20px 0;
+  border-bottom: 1px solid #2a3e52;
+}
+
+#recieptTable tr:last-child {
+  border-bottom: none;
+}
+
+#recieptTable td { border: none !important; }
+#recieptTable td:nth-child(1) { width: 35%; }
+#recieptTable td:nth-child(2) { width: 65%; font-size: 1.5rem !important; padding-left: 20px; }
+#recieptTable td:nth-child(3) { display: none; }
+
+#recieptTable img {
+  width: 100% !important;
+  height: 120px !important;
+  object-fit: cover !important;
+  border-radius: 4px;
+  border: 1px solid #2a3e52;
+}
+
+#recieptTable td:nth-child(2)::after {
+  content: "Activation Key: ABC-DEF-GHI-JKL";
+  display: block;
+  font-size: 1.1rem;
+  color: #e2e8f0;
+  margin-top: 15px;
+}
+
+#recieptTable tr::after {
+  content: "DOWNLOAD";
+  position: absolute;
+  right: 15px;
+  bottom: 20px;
+  border: 1px solid white;
+  padding: 8px 20px;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#recieptTable tr:hover::after {
+  background-color: rgba(255,255,255,0.1);
+}
+
+
+
+/*LIBRARY PAGE*/
+#libraryTable tr {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 20px 0;
+  border-bottom: 1px solid #2a3e52;
+}
+
+#libraryTable tr:last-child {
+  border-bottom: none;
+}
+
+#libraryTable td { border: none !important; }
+#libraryTable td:nth-child(1) { width: 35%; }
+#libraryTable td:nth-child(2) { width: 65%; font-size: 1.5rem !important; padding-left: 20px; position: relative; }
+
+#libraryTable img {
+  width: 100% !important;
+  height: 120px !important;
+  object-fit: cover !important;
+  border-radius: 4px;
+  border: 1px solid #2a3e52;
+}
+
+.library-activation {
+  display: block;
+  font-size: 1.1rem;
+  color: #e2e8f0;
+  margin-top: 15px;
+}
+
+.library-download-btn {
+  position: absolute;
+  right: 15px;
+  bottom: 20px;
+  border: 1px solid white;
+  padding: 8px 20px;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.2s;
+}
+
+.library-download-btn:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+
+
+/*USER INFO PAGE STYLES*/
+.profile-avatar-circle {
+  width: 160px;
+  height: 160px;
+  background-color: #1a232c;
+  border: 2px solid #2a3e52;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0;
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#user-info .list-group-item:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #a48130 !important; 
+}
+
+.logout-link {
+  color: #e76f79 !important; 
+  transition: all 0.3s ease;
+}
+
+#user-info .logout-link:hover {
+  background-color: rgba(234, 134, 143, 0.1) !important; 
+  color: #ff4d4d !important; 
+}
+
+
+
+/* User Login Styles */
+#user-login .form-control, #create-account .form-control {
+  background-color: #1a232c !important;
+  border-color: #2a3e52 !important;
+  color: white !important;
+}
+
+#user-login .form-control:focus, #create-account .form-control:focus {
+  border-color: #a48130 !important;
+  box-shadow: 0 0 0 0.25 rgba(164, 129, 48, 0.25);
+  outline: none;
+}
+
+/* Hides both top and bottom navbars and the search bar container on login mode */
+body.login-mode nav.navbar, 
+body.login-mode .bg-nav-bottom,
+body.login-mode #home,
+body.login-mode #all-games,
+body.login-mode form.mx-auto { 
+    display: none !important; 
+}
+
+#user-login {
+    z-index: 9999;
+}
+
+#create-account {
+    z-index: 9999;
+}
+
+body.login-mode {
+    background: radial-gradient(circle at center, #1a232c 0%, #000000 100%);
+    overflow-x: hidden;
+}
+
+.letter-spacing-2 {
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #a48130 !important; 
+}
+
+.entry-logo-animation {
+    animation: fadeInDown 1.2s ease-out;
+}
+
+/* fading down animation */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    display: none;
+}
+
